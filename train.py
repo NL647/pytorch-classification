@@ -172,7 +172,8 @@ def main_worker(gpu, ngpus_per_node, args):
     train_dataset = datasets.ImageFolder(
         traindir,
         transforms.Compose([
-            #transforms.Resize(224),
+    	    transforms.Resize(256),
+    	    transforms.CenterCrop(224),
             transforms.RandomResizedCrop(args.resolution),
             transforms.RandomHorizontalFlip(),
 	    transforms.transforms.RandomHorizontalFlip(p=0.5),
@@ -196,7 +197,8 @@ def main_worker(gpu, ngpus_per_node, args):
 
     val_loader = torch.utils.data.DataLoader(
         datasets.ImageFolder(valdir, transforms.Compose([
-            transforms.Resize(224),
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
 	    transforms.transforms.RandomHorizontalFlip(p=0.5),
             transforms.transforms.RandomVerticalFlip(p=0.5),
             transforms.transforms.RandomRotation(30),	
